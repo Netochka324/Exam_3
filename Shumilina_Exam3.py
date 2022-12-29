@@ -82,11 +82,11 @@ class Programmer(Company):
 
     @staticmethod
     def knowledge_base():
-        print('''\nA programmer is someone who writes/creates computer software or applications by providing a 
-        specific programming language to the computer. Most programmers have extensive computing and coding 
-        experience in many varieties of programming languages and platforms, such as Structured Query Language (SQL), 
-        Perl, Extensible Markup Language (XML), PHP, HTML, C, C++ and Java. A programmer's most often-used computer 
-        language (e.g., Assembly, C, C++, C#, JavaScript, Lisp, Python, Java, etc.) may be prefixed to the 
+        print('''\nA programmer is someone who writes/creates computer software or applications by providing a
+        specific programming language to the computer. Most programmers have extensive computing and coding
+        experience in many varieties of programming languages and platforms, such as Structured Query Language (SQL),
+        Perl, Extensible Markup Language (XML), PHP, HTML, C, C++ and Java. A programmer's most often-used computer
+        language (e.g., Assembly, C, C++, C#, JavaScript, Lisp, Python, Java, etc.) may be prefixed to the
         aforementioned terms. Some who work with web programming languages may also prefix their titles with web.''')
 
 
@@ -109,33 +109,112 @@ Anny.test()
 # База знаний:
 Programmer.knowledge_base()
 
-# print("\nTask4.")
-#
-#
-# class Animal:
-#     __type_animal = 'Animal'
-#
-#     def __init__(self, name, colour, height):
-#         self.name = name
-#         self.color = colour
-#         self.height = height
-#
-#     def info(self):
-#         print('Животное:', self.__type_animal)
-#         print('имя:', self.name)
-#         print('рост:', self.height)
-#
-#     @staticmethod
-#     def sound():
-#         print('Животное издает звуки')
-#
-#
-# class MyCat(Animal):
-#
-#     def __init__(self, name, colour, height):
-#         super().__init__(name, colour, height)
-#
-#
-# an = Animal('Eddy', 'black', 10)
-# an.info()
-# an.sound()
+
+print("\nTask4.")
+
+
+class Animal:
+    name_default = '<empty>'
+    __type = 'животное'
+    Group_animal = 'Группа: домашнее ' + __type
+
+    def __init__(self, name=name_default):
+        self.name = name
+        print(f"\nРодилось {Animal.__type}.")
+
+    def eat(self):
+        print(f'{self.name} хочет есть. {self.name} ням-ням')
+
+    def sleep(self):
+        print(f'{self.name} хочет спать. {self.name} хрррррр...')
+
+    def __make_noise(self):
+        return "...грр"
+
+    def info(self):
+        print('Класс:', Animal.__type)
+        print('Кличка:', self.name)
+        if self.name == Animal.name_default: print('Дайте животному кличку!')
+        print('Издает звуки:', self.__make_noise())
+
+    @staticmethod
+    def animals_info():
+        print('Кошки и собаки - наиболее распространенные домашние животные.')
+
+    @classmethod
+    def group_animal(cls):
+        return cls.Group_animal
+
+
+class Cat(Animal):
+    __type = 'кот'
+    Group_animal = 'Группа: домашний ' + __type
+
+    def __init__(self, name):
+        super().__init__(name)
+        print(f"Родился {Cat.__type}!")
+
+    def __make_noise(self):
+        return "...мяу"
+
+    def info(self):
+        print('Класс:', Cat.__type)
+        print('Кличка:', self.name)
+        print('Издает звуки:', self.__make_noise())
+
+    @staticmethod
+    def cats_info():
+        print('''Кошка (Felis catus) - домашний вид мелких плотоядных млекопитающих. Это единственный одомашненный 
+        вид в семействе кошачьих, и его часто называют домашней кошкой, чтобы отличить его от диких членов семейства. 
+        Кошка может быть домашней кошкой, фермерской кошкой или дикой кошкой; последняя свободно передвигается и 
+        избегает контакта с человеком.''')
+
+
+class Dog(Animal):
+    __type = 'собака'
+    Group_animal = 'Группа: домашняя ' + __type
+
+    def __init__(self, name):
+        super().__init__(name)
+
+    def __make_noise(self):
+        return "...гав"
+
+    def info(self):
+        print('Класс:', Dog.__type)
+        print('Кличка:', self.name)
+        print('Издает звуки:', self.__make_noise())
+
+    @staticmethod
+    def dogs_info():
+        print('''С зоологической точки зрения, собака — плацентарное млекопитающее отряда хищных семейства псовых. 
+        Собаки известны своими способностями к обучению, любовью к игре, социальным поведением. Выведены специальные 
+        породы собак, предназначенные для различных целей: охоты, охраны, тяги гужевого транспорта и другого, 
+        а также декоративные породы (например, болонка, пудель).''')
+
+
+obj = Animal('Маша')
+print(Animal.group_animal())
+obj.info()
+obj.eat()
+obj.sleep()
+Animal.animals_info()
+
+obj1 = Cat('Мурка')
+obj1.info()
+obj1.eat()
+Cat.cats_info()
+
+obj2 = Dog('Шарик')
+print(obj2.group_animal())
+obj2.info()
+obj2.eat()
+obj2.sleep()
+Dog.dogs_info()
+
+obj3 = Animal()
+obj3.info()
+
+obj4 = Cat('Гномик')
+print(obj4.group_animal())
+obj4.info()
