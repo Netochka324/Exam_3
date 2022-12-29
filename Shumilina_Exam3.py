@@ -35,15 +35,23 @@ from abc import abstractmethod
 
 class Company:
     _levels = {1: 'junior', 2: 'middle', 3: 'senior', 4: 'lead'}
+    __update_by_courses = True
+    __degree_by_courses = 1
 
     def __init__(self, _index):
         self._index = _index
         self._levels = self._levels[_index]
 
+    def __level_up_by_courses(self):
+        if Company.__update_by_courses:
+            self._index += Company.__degree_by_courses
+
     def _level_up(self):
+        Company.__level_up_by_courses(self)
         if self._index <= 3:
             self._index += 1
             self._levels = Company._levels[self._index]
+        else: self._levels = Company._levels[4]
 
     def is_lead(self):
         return self._index == 4
@@ -65,8 +73,6 @@ class Programmer(Company):
     def work(self):
         if not self.is_lead():
             self._level_up()
-        else:
-            print('!!!Уровень сотрудника достиг максимального')
 
     def info(self):
         print(f'\nСотрудник:\nИмя: {self.name}\nВозраст: {self.age}\nКвалификация: {self._levels}')
@@ -77,12 +83,11 @@ class Programmer(Company):
     @staticmethod
     def knowledge_base():
         print('''\nA programmer is someone who writes/creates computer software or applications by providing a 
-specific programming language to the computer. Most programmers have extensive computing and coding 
-experience in many varieties of programming languages and platforms, such as Structured Query Language (SQL), 
-Perl, Extensible Markup Language (XML), PHP, HTML, C, C++ and Java. 
-    A programmer's most often-used computer 
-language (e.g., Assembly, C, C++, C#, JavaScript, Lisp, Python, Java, etc.) may be prefixed to the 
-aforementioned terms. Some who work with web programming languages may also prefix their titles with web.''')
+        specific programming language to the computer. Most programmers have extensive computing and coding 
+        experience in many varieties of programming languages and platforms, such as Structured Query Language (SQL), 
+        Perl, Extensible Markup Language (XML), PHP, HTML, C, C++ and Java. A programmer's most often-used computer 
+        language (e.g., Assembly, C, C++, C#, JavaScript, Lisp, Python, Java, etc.) may be prefixed to the 
+        aforementioned terms. Some who work with web programming languages may also prefix their titles with web.''')
 
 
 # Вариант задания исходных данных с клавиатуры и с использованием значений по умолчанию:
@@ -104,36 +109,33 @@ Anny.test()
 # База знаний:
 Programmer.knowledge_base()
 
-print("\nTask4.")
-
-
-
-
-
-class Animal:
-    __type_animal = 'Animal'
-
-    def __init__(self, name, colour, height):
-        self.name = name
-        self.color = colour
-        self.height = height
-
-    def info(self):
-        print('Животное:', self.__type_animal)
-        print('имя:', self.name)
-        print('рост:', self.height)
-
-    @staticmethod
-    def sound():
-        print('Животное издает звуки')
-
-
-class MyCat(Animal):
-
-    def __init__(self, name, colour, height):
-        super().__init__(name, colour, height)
-
-
-an = Animal('Eddy', 'black', 10)
-an.info()
-an.sound()
+# print("\nTask4.")
+#
+#
+# class Animal:
+#     __type_animal = 'Animal'
+#
+#     def __init__(self, name, colour, height):
+#         self.name = name
+#         self.color = colour
+#         self.height = height
+#
+#     def info(self):
+#         print('Животное:', self.__type_animal)
+#         print('имя:', self.name)
+#         print('рост:', self.height)
+#
+#     @staticmethod
+#     def sound():
+#         print('Животное издает звуки')
+#
+#
+# class MyCat(Animal):
+#
+#     def __init__(self, name, colour, height):
+#         super().__init__(name, colour, height)
+#
+#
+# an = Animal('Eddy', 'black', 10)
+# an.info()
+# an.sound()
